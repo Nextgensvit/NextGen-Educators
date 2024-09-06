@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioMedical Teacher Assessment </title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/logopng.png" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: rgb(0, 0, 0);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            z-index: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border: 2px solid cyan;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgb(234, 255, 0);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: cyan;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        label {
+            display: inline-block;
+            margin: 15px 10px 10px 0;
+            font-size: 1.2em;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            resize: vertical;
+            margin-top: 10px;
+        }
+
+        .button {
+            background: cyan;
+            color: black;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background: #00ffff;
+            transform: scale(1.1);
+        }
+
+        .result {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#">
+          <img class="logo" alt="nextgen logo" src="img/logopng.png"
+            
+            />
+        </a>
+    </header>
+    <div class="container">
+        <h1>Let's Assess You BioMed Teachers!</h1>
+        <form id="biomedxyzForm">
+            <div class="question active" id="question1">
+                <label for="q1">Q1: How effectively do you explain complex medical and biological concepts to students?</label>
+                <div class="options">
+                    <input type="radio" id="q1a" name="q1" value="5">
+                    <label for="q1a"> I use multiple methods and real-life examples to ensure deep understanding.</label>
+                    <input type="radio" id="q1b" name="q1" value="4">
+                    <label for="q1b"> I explain concepts clearly but may need occasional clarifications. </label>
+                    <input type="radio" id="q1c" name="q1" value="3">
+                    <label for="q1c"> I explain concepts but students often require additional help.</label>
+                    <input type="radio" id="q1d" name="q1" value="1">
+                    <label for="q1d"> I find it difficult to explain complex concepts in a way that students grasp.</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(1)">Next</button>
+            </div>
+            <div class="question" id="question2">
+                <label for="q2">Q2: How do you engage students during your lessons? </label>
+                <div class="options">
+                    <input type="radio" id="q2a" name="q2" value="5">
+                    <label for="q2a">I use interactive activities, discussions, and practical demonstrations. </label>
+                    <input type="radio" id="q2b" name="q2" value="4">
+                    <label for="q2b"> I incorporate multimedia and occasional interactive elements.</label>
+                    <input type="radio" id="q2c" name="q2" value="3">
+                    <label for="q2c">I rely mostly on lectures with limited interactive components. </label>
+                    <input type="radio" id="q2d" name="q2" value="1">
+                    <label for="q2d"> I mainly use lectures with minimal student interaction.</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(2)">Next</button>
+            </div>
+            <div class="question" id="question3">
+                <label for="q3">Q3: How adaptable are you in modifying your teaching methods based on student feedback?</label>
+                <div class="options">
+                    <input type="radio" id="q3a" name="q3" value="5">
+                    <label for="q3a"> I frequently adjust my methods based on feedback and student needs.</label>
+                    <input type="radio" id="q3b" name="q3" value="4">
+                    <label for="q3b"> I occasionally modify my approach based on feedback.</label>
+                    <input type="radio" id="q3c" name="q3" value="3">
+                    <label for="q3c"> I rarely change my methods and stick to a set approach. </label>
+                    <input type="radio" id="q3d" name="q3" value="1">
+                    <label for="q3d"> I do not make adjustments based on feedback.</label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(3)">Next</button>
+            </div>
+            <div class="question" id="question4">
+                <label for="q4">Q4:How well do you manage your time for lectures, grading, and other responsibilities?</label>
+                <div class="options">
+                    <input type="radio" id="q4a" name="q4" value="5">
+                    <label for="q4a"> I effectively balance all aspects of my teaching responsibilities.</label>
+                    <input type="radio" id="q4b" name="q4" value="4">
+                    <label for="q4b">I manage most aspects well, with occasional lapses. </label>
+                    <input type="radio" id="q4c" name="q4" value="3">
+                    <label for="q4c"> I struggle with balancing time but generally meet deadlines.</label>
+                    <input type="radio" id="q4d" name="q4" value="1">
+                    <label for="q4d"> I often miss deadlines and have difficulty managing time. </label>
+                </div>
+                <button type="button" class="button" onclick="nextQuestion(4)">Next</button>
+            </div>
+            <div class="question" id="question5">
+                <label for="q5">Q5: How would you rate your ability to provide constructive feedback to students?</label>
+                <div class="options">
+                    <input type="radio" id="q5a" name="q5" value="5">
+                    <label for="q5a">I provide detailed, actionable feedback regularly.  </label>
+                    <input type="radio" id="q5b" name="q5" value="4">
+                    <label for="q5b"> I give useful feedback, though it may vary in detail. </label>
+                    <input type="radio" id="q5c" name="q5" value="3">
+                    <label for="q5c">I provide feedback that is sometimes vague or not very actionable. </label>
+                    <input type="radio" id="q5d" name="q5" value="1">
+                    <label for="q5d"> I seldom provide meaningful feedback to students.</label>
+                    <button type="button" class="button" onclick="nextQuestion(5)">Next</button>
+                </div>
+            </div>    
+                
+                <div class="question" id="question6">
+                    <label for="q6">Q6:How approachable are you for students seeking help outside of class?</label>
+                    <div class="options">
+                        <input type="radio" id="q6a" name="q6" value="5">
+                        <label for="q6a">I am always available and eager to assist students.</label>
+                        <input type="radio" id="q6b" name="q6" value="4">
+                        <label for="q6b">I am generally available with defined office hours.</label>
+                        <input type="radio" id="q6c" name="q6" value="3">
+                        <label for="q6c"> I am available but students find it somewhat challenging to reach me. </label>
+                        <input type="radio" id="q6d" name="q6" value="1">
+                        <label for="q6d"> I am rarely available for student help outside of class. </label>
+                        <button type="button" class="button" onclick="nextQuestion(6)">Next</button>
+                    </div>
+                </div>    
+                    
+
+                    <div class="question" id="question7">
+                        <label for="q7">Q7: How do you incorporate current research and developments into your teaching?</label>
+                        <div class="options">
+                            <input type="radio" id="q7a" name="q7" value="5">
+                            <label for="q7a">I regularly update my course content with the latest research and developments.</label>
+                            <input type="radio" id="q7b" name="q7" value="4">
+                            <label for="q7b"> I incorporate current research and developments occasionally. </label>
+                            <input type="radio" id="q7c" name="q7" value="3">
+                            <label for="q7c">I include research findings infrequently or in a limited way. </label>
+                            <input type="radio" id="q7d" name="q7" value="1">
+                            <label for="q7d">I do not integrate recent research into my curriculum.</label>
+                            <button type="button" class="button" onclick="nextQuestion(7)">Next</button>
+                        </div>
+                    </div>    
+                        
+
+                        <div class="question" id="question8">
+                            <label for="q8">Q8:How well do you support students through challenging material? </label>
+                            <div class="options">
+                                <input type="radio" id="q8a" name="q8" value="5">
+                                <label for="q8a"> I offer additional resources, extra help, and tailored support.</label>
+                                <input type="radio" id="q8b" name="q8" value="4">
+                                <label for="q8b"> I provide support and clarification when needed. </label>
+                                <input type="radio" id="q8c" name="q8" value="3">
+                                <label for="q8c">I provide some assistance but expect students to manage independently.</label>
+                                <input type="radio" id="q8d" name="q8" value="1">
+                                <label for="q8d"> I offer minimal support for challenging material. </label>
+                                <button type="button" class="button" onclick="nextQuestion(8)">Next</button>
+                            </div>
+                        </div>    
+
+                            <div class="question" id="question9">
+                                <label for="q9">Q9.How effective are you at inspiring and motivating your students?</label>
+                                <div class="options">
+                                    <input type="radio" id="q9a" name="q9" value="5">
+                                    <label for="q9a"> I actively inspire and motivate students to excel in their studies. </label>
+                                    <input type="radio" id="q9b" name="q9" value="4">
+                                    <label for="q9b"> I often provide motivation and encouragement. </label>
+                                    <input type="radio" id="q9c" name="q9" value="3">
+                                    <label for="q9c">I occasionally try to inspire but with limited effectiveness.</label>
+                                    <input type="radio" id="q9d" name="q9" value="1">
+                                    <label for="q9d">I rarely make an effort to motivate or inspire students.
+                                    </label>
+                                    <button type="button" class="button" onclick="nextQuestion(9)">Next</button>
+                                </div>
+                            </div>        
+                                
+
+                                <div class="question" id="question10">
+                                    <label for="q10">Q10:  How proficient are you with using educational technology in your teaching?</label>
+                                    <div class="options">
+                                        <input type="radio" id="q10a" name="q10" value="5">
+                                        <label for="q10a">I effectively integrate a variety of educational technologies into my lessons.</label>
+                                        <input type="radio" id="q10b" name="q10" value="4">
+                                        <label for="q10b"> I use some educational technologies with moderate effectiveness.</label>
+                                        <input type="radio" id="q10c" name="q10" value="3">
+                                        <label for="q10c"> I use basic educational technology but it has limited impact.</label>
+                                        <input type="radio" id="q10d" name="q10" value="1">
+                                        <label for="q10d">I rarely use educational technology in my teaching.
+                                        </label>
+                                        <button type="button" class="button" onclick="nextQuestion(10)">Next</button>
+                                    </div>
+                                </div>    
+
+                                    <div class="question" id="question11">
+                                        <label for="q11">Q11:How do you approach problem-solving in your teaching?</label>
+                                        <div class="options">
+                                         <input type="radio" id="q11a" name="q11" value="5">
+                                            <label for="q11a"> I teach systematic and innovative problem-solving techniques.  </label>
+                                            <input type="radio" id="q11b" name="q11" value="4">
+                                            <label for="q11b">  I provide structured guidance on problem-solving techniques. </label>
+                                            <input type="radio" id="q11c" name="q11" value="3">
+                                            <label for="q11c"> I focus mainly on theoretical problem-solving methods.  </label>
+                                            <input type="radio" id="q11d" name="q11" value="1">
+                                            <label for="q11d"> I do not emphasize problem-solving skills in my teaching.
+                                            </label>
+                                            <button type="button" class="button" onclick="nextQuestion(11)">Next</button>
+                                        </div>
+                                    </div>
+
+                                        <div class="question" id="question12">
+                                            <label for="q12">Q12: How committed are you to your own professional development? </label>
+                                            <div class="options">
+                                                <input type="radio" id="q12a" name="q12" value="5">
+                                                <label for="q12a"> I actively seek out and engage in various professional development opportunities.</label>
+                                                <input type="radio" id="q12b" name="q12" value="4">
+                                                <label for="q12b"> I attend workshops and courses regularly but not extensively.</label>
+                                                <input type="radio" id="q12c" name="q12" value="3">
+                                                <label for="q12c">I engage in professional development occasionally.</label>
+                                                <input type="radio" id="q12d" name="q12" value="1">
+                                                <label for="q12d"> I do not prioritize or engage in professional development. 
+                                                </label>
+                                                <button type="button" class="button" onclick="nextQuestion(12)">Next</button>
+                                            </div>
+                                        </div>
+
+                                            <div class="question" id="question13">
+                                                <label for="q13">Q13:How well do you handle feedback and criticism from students and peers? </label>
+                                                <div class="options">
+                                                    <input type="radio" id="q13a" name="q13" value="5">
+                                                    <label for="q13a"> I actively seek and use feedback to continuously improve my teaching.</label>
+                                                    <input type="radio" id="q13b" name="q13" value="4">
+                                                    <label for="q13b">I accept feedback and make adjustments as needed. </label>
+                                                    <input type="radio" id="q13c" name="q13" value="3">
+                                                    <label for="q13c"> I listen to feedback but often struggle to implement changes. </label>
+                                                    <input type="radio" id="q13d" name="q13" value="1">
+                                                    <label for="q13d"> I am resistant to feedback and make few changes. 
+                                                    </label>
+                                                    <button type="button" class="button" onclick="nextQuestion(13)">Next</button>
+                                                </div>
+                                            </div>
+
+                                                <div class="question" id="question14">
+                                                    <label for="q14">Q14:How do you foster collaboration among students in your classes? </label>
+                                                    <div class="options">
+                                                        <input type="radio" id="q14a" name="q14" value="5">
+                                                        <label for="q14a"> I actively encourage and facilitate collaborative projects and teamwork.</label>
+                                                        <input type="radio" id="q14b" name="q14" value="4">
+                                                        <label for="q14b"> I provide opportunities for collaboration and group work.</label>
+                                                        <input type="radio" id="q14c" name="q14" value="3">
+                                                        <label for="q14c"> I occasionally encourage collaboration but it is not a primary focus.</label>
+                                                        <input type="radio" id="q14d" name="q14" value="1">
+                                                        <label for="q14d"> I do not focus on or facilitate student collaboration. 
+                                                        </label>
+                                                        <button type="button" class="button" onclick="nextQuestion(14)">Next</button>
+                                                    </div>
+                                                </div>    
+
+                                                    <div class="question" id="question15">
+                                                        <label for="q15">Q15:How do you address the diverse needs of your students?</label>
+                                                        <div class="options">
+                                                            <input type="radio" id="q15a" name="q15" value="5">
+                                                            <label for="q15a"> I adapt my teaching methods to accommodate various learning styles and needs. </label>
+                                                            <input type="radio" id="q15b" name="q15" value="4">
+                                                            <label for="q15b">  I address diverse needs to some extent but may not fully adapt.</label>
+                                                            <input type="radio" id="q15c" name="q15" value="3">
+                                                            <label for="q15c"> I attempt to address diverse needs but with limited success. </label>
+                                                            <input type="radio" id="q15d" name="q15" value="1">
+                                                            <label for="q15d"> I do not actively address or adapt to the diverse needs of my students. 
+                                                            </label>
+                                                            
+                                                        </div>
+                                                        <button type="button" class="button" onclick="showResult()">Submit</button> 
+                                                    </div>
+                
+                
+            
+        </form>
+        <div class="result" id="result">
+            <p id="score"></p>
+            <p id="recommendation"></p>
+        </div>
+    </div>
+
+    <script>
+        function nextQuestion(current) {
+            document.getElementById('question' + current).classList.remove('active');
+            document.getElementById('question' + (current + 1)).classList.add('active');
+        }
+
+        function showResult() {
+            let score = 0;
+            const questions = 15; 
+            for (let i = 1; i <= questions; i++) {
+                const answer = document.querySelector('input[name="q' + i + '"]:checked');
+                if (answer) {
+                    score += parseInt(answer.value);
+                }
+            }
+
+            const formElement = document.getElementById('biomedxyzForm');
+            const resultElement = document.getElementById('result');
+            const scoreElement = document.getElementById('score');
+            const recommendationElement = document.getElementById('recommendation');
+
+            if (formElement && resultElement && scoreElement && recommendationElement) {
+                formElement.style.display = 'none';
+                resultElement.style.display = 'block';
+                scoreElement.innerText = 'Your Genscore is: ' + score;
+
+                if (score <= 24) {
+                    recommendationElement.innerText = 'Overview: \n Teachers falling within this score range are categorized as "Foundational." \n This indicates a need for significant improvement in various teaching competencies. These educators may be at the very beginning of their professional journey or might be struggling to employ effective teaching strategies. They often lack the necessary skills to create an engaging and productive classroom environment. \n\n Characteristics:-\n Minimal Engagement: These teachers often struggle to capture and retain students attention. The classroom environment might be dull or unstructured, leading to low levels of student participation.\n - Rigid Teaching Approach: They rely heavily on outdated or traditional methods that do not cater to the diverse needs of modern students. Innovative and student-centered approaches are typically missing.\n - Basic Subject Mastery: Their understanding of the subject matter may be fundamental, which affects their ability to provide comprehensive insights or adapt explanations based on student needs.\n Areas for Improvement:- Strengthen Content Knowledge: Attending subject-specific workshops or courses can help improve their depth of knowledge.\n - Diversify Teaching Methods: Training on modern teaching techniques like active learning, flipped classrooms, or problem-based learning can help engage students more effectively.\n - Enhance Classroom Management Skills: Implementing clear rules and using positive reinforcement can help maintain discipline and create a conducive learning environment.\n\n\n Recommendations:- Regular professional development sessions focusing on basic pedagogy and classroom dynamics.\n- Collaboration with more experienced colleagues for mentorship and support.\n - Engaging with students to better understand their needs and preferences.\n';
+                } else if (score >= 25 && score <= 39 ) {
+                    recommendationElement.innerText = 'Overview: \n Teachers in this range are considered "Developing," showing that they have a basic grasp of effective teaching but need further refinement and consistency. While they are capable of connecting with students, their teaching strategies may lack diversity, and they may not always adapt to different classroom scenarios effectively.\n\nCharacteristics:\nModerate Student Interaction: These teachers are moderately successful in involving students in classroom activities, though they may occasionally revert to lecture-based instruction.\nInconsistent Use of Resources: There is some use of teaching aids and technology, but it lacks consistency or integration with learning objectives.\nBasic Analytical Skills: They are able to communicate core concepts but may lack the ability to encourage critical thinking or deep understanding.\nAreas for Improvement:Enhance Instructional Design: Training on developing more interactive and dynamic lesson plans will help improve engagement.\nImplement Continuous Assessment: Using formative assessments and feedback loops can help adjust teaching strategies in real-time to meet student needs.\nDevelop Differentiated Learning Strategies: Understanding and addressing the diverse learning styles within the classroom can lead to better student outcomes.\n\nRecommendations:Regular peer observations and feedback sessions to improve teaching practices.Continued professional development focused on interactive and experiential learning methods.Encouragement to create an inclusive and supportive learning environment.';
+                } else if (score >=40 && score <=54) {
+                    recommendationElement.innerText = 'Overview: \n Teachers with scores in this range fall under the "Proficient" category. These educators demonstrate a good command of subject matter, instructional methods, and classroom management skills. However, there is room to elevate their teaching practices to a more innovative and engaging level.\n\n Characteristics:Effective Classroom Management: Teachers in this group are generally effective in managing classroom dynamics, maintaining a balance between discipline and engagement.\nGood Use of Teaching Tools: They utilize various teaching aids and technology to enhance learning but may not always maximize their potential.\nSolid Content Delivery: These teachers have a good understanding of their subject and are effective in conveying concepts to students, though they might not always challenge students to think critically. \n\n Areas for Improvement:\nEncourage Student Autonomy: Empower students by incorporating more project-based learning and opportunities for self-directed exploration.\nIntegrate Advanced Educational Technology: Regular use of simulation tools, educational apps, and multimedia can further enhance the learning experience.\nCultivate Critical Thinking: Incorporating more inquiry-based and Socratic questioning methods can deepen understanding and analysis.\n\nRecommendations:\nParticipate in advanced workshops on pedagogical innovations and blended learning strategies.\nCollaborate on interdisciplinary projects to broaden teaching approaches\nFocus on continuous professional reflection and adaptation of new teaching methodologies.\n';
+                } else if (score >=55 && score <=64) {recommendationElement.innerText = 'Overview: \n Teachers who score within this range are classified as "Advanced." These educators are highly effective in their teaching practices, utilizing a range of instructional techniques, maintaining high levels of student engagement, and continuously seeking to improve their methods.\n\nCharacteristics:\nHigh Student Engagement: Advanced teachers consistently create a dynamic and interactive learning environment where students feel motivated to participate and learn.\nAdaptive and Innovative: They are adept at modifying their instructional strategies to cater to different learning styles and needs, ensuring that all students are engaged and challenged.\nStrong Knowledge Application: These teachers are skilled at connecting theoretical concepts to practical applications, making learning relevant and meaningful.\n\nAreas for Improvement:\nLead Educational Initiatives: Advanced teachers should consider leading workshops or training sessions for their peers to share their best practices.\nStay Updated with Pedagogical Research: Continuous engagement with the latest educational research and trends will help maintain a cutting-edge teaching style.\nExpand Use of Data-Driven Instruction: Utilizing data from assessments to personalize learning and provide targeted support can further enhance their effectiveness.\n\nRecommendations:\nInvolvement in school leadership or curriculum development roles.\nParticipation in educational conferences or publication of research papers.\nContinued exploration of new and emerging educational technologies.' ;
+            } else if (score >= 65 && score <= 75 ) {recommendationElement.innerTest = 'Overview:\n Teachers scoring in this range are recognized as "Expert" educators, showcasing exceptional mastery in teaching strategies, student engagement, content knowledge, and educational innovation. These teachers are often viewed as leaders in their field and serve as role models for their peers.\n\nCharacteristics:\nExemplary Student-Centered Approach: Expert teachers create highly engaging, inclusive, and student-centered classrooms where each students potential is maximized.\nInnovative and Forward-Thinking: They are pioneers in integrating cutting-edge educational technology and research-based practices to deliver outstanding educational experiences.\nMentorship and Leadership: These teachers are not only excellent in their own classrooms but are also committed to uplifting the broader teaching community through mentorship, training, and leadership.\n\nAreas for Improvement:\nPursue Educational Leadership Opportunities: These teachers can extend their influence by pursuing roles such as department heads, educational coaches, or policy advocates.\nContribute to Educational Research and Development: Engaging in or leading research projects to contribute to the wider body of educational knowledge can be highly beneficial.\nContinual Skill Enhancement: While already highly skilled, ongoing learning and development are crucial to staying at the forefront of educational innovation.\n\nRecommendations:\nEngage in national and international teaching forums to share expertise and learn from global peers.\nDevelop and lead school-wide or district-wide initiatives for educational improvement.\nCollaborate with academic researchers to innovate and implement new teaching strategies.' ;
+            } 
+        } else {
+                console.error('One or more elements are missing in the DOM.');
+            }
+        }
+    </script>
+</body>
+</html>
